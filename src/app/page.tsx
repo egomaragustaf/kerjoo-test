@@ -5,6 +5,8 @@ import Link from "next/link";
 
 import { CardPost } from "@/components/shared/post-card";
 import { useGetPostQuery } from "@/store/postApi";
+import { AddPostForm } from "@/components/shared/post-form";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [page, setPage] = useState(1);
@@ -24,7 +26,7 @@ export default function Home() {
   if (error) return <div>Oh no, there was an error</div>;
 
   return (
-    <div className="mx-auto max-w-7xl min-h-screen">
+    <div className="mx-auto max-w-7xl min-h-screen space-y-4">
       <ul className="grid grid-cols-2 gap-4">
         {data?.map((post) => (
           <li key={post.id}>
@@ -34,13 +36,14 @@ export default function Home() {
           </li>
         ))}
       </ul>
-      <div className="flex gap-4">
-        <button onClick={handlePreviousPage} disabled={page === 1}>
+      <div className="flex gap-4 items-center justify-end">
+        <Button onClick={handlePreviousPage} disabled={page === 1}>
           Previous
-        </button>
-        <span>Page {page}</span>
-        <button onClick={handleNextPage}>Next</button>
+        </Button>
+        <span className="text-lg font-bold">{page}</span>
+        <Button onClick={handleNextPage}>Next</Button>
       </div>
+      {/* <AddPostForm /> */}
     </div>
   );
 }

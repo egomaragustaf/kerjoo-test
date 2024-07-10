@@ -11,9 +11,10 @@ export default function Page({ params }: { params: { id: string } }) {
   if (error) return <div>Oh no, there was an error</div>;
 
   return (
-    <main>
-      <h1>Post {params.id}</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <main className="mx-auto max-w-7xl min-h-screen space-y-4">
+      <h1 className="text-2xl font-bold">Title: {data?.title}</h1>
+      <h2 className="text-xl">Article</h2>
+      <p className="text-xl">{data?.body}</p>
     </main>
   );
 }

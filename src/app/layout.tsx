@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { StateProvider } from "@/store/provider";
+import { Layout } from "@/components/layout/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>{children}</body>
+      <StateProvider>
+        <body className={inter.className}>
+          <Layout>{children}</Layout>
+        </body>
+      </StateProvider>
     </html>
   );
 }

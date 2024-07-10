@@ -5,12 +5,15 @@ import Link from "next/link";
 
 import { CardPost } from "@/components/shared/post-card";
 import { useGetPostQuery } from "@/store/postApi";
-import { AddPostForm } from "@/components/shared/post-form";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [page, setPage] = useState(1);
-  const { data, isFetching, error, isLoading } = useGetPostQuery({ page });
+  const [search, setSearch] = useState<string | undefined>(undefined);
+  const { data, isFetching, error, isLoading } = useGetPostQuery({
+    page,
+    search,
+  });
 
   console.log(data);
 
@@ -20,6 +23,11 @@ export default function Home() {
 
   const handlePreviousPage = () => {
     setPage((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+
+  const handleSearch = (search: string) => {
+    setSearch(search);
+    setPage(1);
   };
 
   if (isLoading || isFetching) return <div>Loading...</div>;
